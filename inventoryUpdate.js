@@ -22,11 +22,19 @@ function updateInventory(arr1, arr2) {
     	retObj[arr2Keys[i]]=0;
     }
 
-    var retObjKeys=Object.keys(retObj);
+    var retObjKeys=Object.keys(retObj).sort();
     var retArr=[];
 
     for(var i=0;i<retObjKeys.length;i++){
     	var sum=arr1Obj[retObjKeys[i]]+arr2Obj[retObjKeys[i]];
+    	if(isNaN(sum)){
+    		if(arr1Keys.includes(retObjKeys[i])){
+    			sum=arr1Obj[retObjKeys[i]];
+    		}
+    		else{
+    			sum=arr2Obj[retObjKeys[i]];
+    		}
+    	}
     	retArr.push([sum,retObjKeys[i]]);
     }
     return retArr;
